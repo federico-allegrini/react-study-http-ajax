@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 
 import Posts from "./Posts/Posts";
 import NewPost from "./NewPost/NewPost";
@@ -8,24 +8,32 @@ import "./Blog.css";
 
 class Blog extends Component {
   render() {
+    console.log(this.props);
     return (
       <div className="Blog">
         <header>
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <NavLink to="/" exact activeClassName="my-active">
+                  Home
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to={{
-                    pathname: "/new-post",
+                    pathname: "/new-post", // Always absolute Path
+                    // pathname: this.props.match.url + "/new-post", // Relative Path
                     hash: "#submit",
                     search: "?quick-submit=true",
                   }}
+                  activeStyle={{
+                    color: "#fa923f",
+                    textDecoration: "underline",
+                  }}
                 >
                   New Post
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>
